@@ -47,6 +47,13 @@ For the quickest installation, use our web-based installer (Chrome/Edge browsers
 4. Choose "EmbeddedWizardDemo" and your board type
 5. Click "Flash" and wait for completion
 
+
+## Flashing from console
+
+```shell
+ python -m esptool --chip esp32p4 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 40m 0x2000 build\bootloader\bootloader.bin 0x8000 build\partition_table\partition-table.bin 0x10000 build\EmbeddedWizard-ESP32-P4-Function-EV-Board.bin
+```
+
 ## Getting Started
 
 For detailed information about developing UI applications for the ESP32-P4, refer to:
