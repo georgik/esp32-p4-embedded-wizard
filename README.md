@@ -1,7 +1,5 @@
 # ESP32-P4 Demo - Embedded Wizard
 
-![ESP32-P4 Embedded Wizard Demo](docs/images/esp32-p4-embedded-wizard.webp)
-
 This repository contains a demo application showcasing the powerful combination of Espressif's ESP32-P4 microcontroller and TARA Systems' Embedded Wizard GUI framework.
 
 ## Demo Video
@@ -12,7 +10,7 @@ This repository contains a demo application showcasing the powerful combination 
 
 ## Technology Combination
 
-This demo demonstrates the synergy between two cutting-edge technologies:
+This demo demonstrates the synergy between two technologies:
 
 ### ESP32-P4 Microcontroller
 - **High Performance**: 400 MHz dual-core RISC-V processor
@@ -36,6 +34,18 @@ This demo demonstrates the synergy between two cutting-edge technologies:
 - Efficient memory management with PSRAM utilization
 - Professional-grade UI components
 - Real-time performance optimization
+
+## Web-based Flashing (Easiest)
+
+For the quickest installation, use our web-based installer (Chrome/Edge browsers recommended):
+
+[![Try it with ESP Launchpad](https://espressif.github.io/esp-launchpad/assets/try_with_launchpad.png)](https://georgik.github.io/esp32-p4-embedded-wizard/?flashConfigURL=https://georgik.github.io/esp32-p4-embedded-wizard/config/config.toml)
+
+1. Connect your ESP32-P4-Function-EV-Board via USB
+2. Click the button above to open the web installer
+3. Click "Connect" and select your board's serial port
+4. Choose "EmbeddedWizardDemo" and your board type
+5. Click "Flash" and wait for completion
 
 ## Getting Started
 

@@ -1,0 +1,93 @@
+name: Create GitHub Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_name:
+        description: 'Name of the GitHub Release'
+        required: true
+        default: 'v1.0.0'
+      release_tag:
+        description: 'Tag for the GitHub Release'
+        required: true
+        default: 'v1.0.0'
+      prefix:
+        description: 'Prefix for binary name'
+        required: true
+        default: 'esp32-p4-embedded-wizard'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh
+
+      - name: Authenticate GitHub CLI
+        run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Check if Release Exists
+        id: check_release
+        run: |
+          set +e
+          gh release view ${{ github.event.inputs.release_tag }} > /dev/null 2>&1
+          if [ $? -eq 0 ]; then
+            echo "Release already exists."
+            echo "release_exists=true" >> $GITHUB_ENV
+          else
+            echo "Release does not exist."
+            echo "release_exists=false" >> $GITHUB_ENV
+          fi
+          set -e
+
+      - name: Generate Release Notes
+        run: |
+          cat > /tmp/release_notes.md <<EOF
+          # ESP32-P4 Embedded Wizard Demo ${{ github.event.inputs.release_tag }}
+          
+          ## Web-based Flashing (Easiest)
+          
+          Use our web-based installer for one-click flashing:
+          
+          [![Try it with ESP Launchpad](https://espressif.github.io/esp-launchpad/assets/try_with_launchpad.png)](https://georgik.github.io/esp32-p4-embedded-wizard/?flashConfigURL=https://georgik.github.io/esp32-p4-embedded-wizard/config/config.toml)
+          
+          ## Manual Installation
+          
+          1. Download the firmware binary for ESP32-P4-Function-EV-Board
+          2. Use esptool.py or ESP32 Flash Download Tool to flash the binary
+          3. Connect your ESP32-P4-Function-EV-Board via USB
+          4. Flash the binary to address 0x0
+          
+          ## Hardware Requirements
+          
+          - ESP32-P4-Function-EV-Board
+          - Compatible display (1024x600 resolution)
+          - USB cable for programming and power
+          
+          ## Features
+          
+          - Professional UI demonstration using Embedded Wizard framework
+          - High-resolution display support (1024x600)
+          - Touch input handling
+          - Hardware-accelerated graphics with ESP32-P4's GPU
+          - PSRAM utilization for complex UI applications
+          EOF
+
+      - name: Create Release
+        if: env.release_exists == 'false'
+        run: |
+          gh release create ${{ github.event.inputs.release_tag }} --title "${{ github.event.inputs.release_name }}" --prerelease --notes-file /tmp/release_notes.md
+
+      - name: Manual Upload Instructions
+        run: |
+          echo "Release created successfully!"
+          echo "Please manually upload your compiled binary files to this release:"
+          echo "https://github.com/${{ github.repository }}/releases/tag/${{ github.event.inputs.release_tag }}"
+          echo ""
+          echo "Expected binary name format: ${{ github.event.inputs.prefix }}-${{ github.event.inputs.release_tag }}-esp32_p4_function_ev_board.bin"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

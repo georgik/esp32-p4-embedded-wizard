@@ -1,0 +1,29 @@
+esp_toml_version = 1.0
+
+# Base URL where ESP32-P4 Embedded Wizard firmware binaries are hosted
+firmware_images_url = "https://georgik.github.io/esp32-p4-embedded-wizard/firmware/"
+
+# ESP32-P4 Embedded Wizard applications available
+supported_apps = ["EmbeddedWizardDemo"]
+
+# Configuration documentation
+config_readme_url = "https://raw.githubusercontent.com/georgik/esp32-p4-embedded-wizard/main/README.md"
+
+[EmbeddedWizardDemo]
+# Supported ESP32 chipsets
+chipsets = ["ESP32-P4"]
+
+# Development kits
+developKits.esp32-p4 = ["esp32-p4-function-ev-board"]
+
+# Firmware images for each board (using merged binaries)
+image.esp32-p4-function-ev-board = "esp32-p4-embedded-wizard-latest-esp32_p4_function_ev_board.bin"
+
+# Description
+description = "ESP32-P4 Embedded Wizard Demo - Professional UI framework demonstration showcasing high-resolution graphics, touch input, and hardware-accelerated rendering on ESP32-P4."
+
+# Additional information
+readme.text = "https://raw.githubusercontent.com/georgik/esp32-p4-embedded-wizard/main/README.md"
+
+# Console settings
+console_baudrate = 115200
