@@ -100,7 +100,7 @@ esptool.py --chip esp32p4 merge_bin -o esp32-p4-embedded-wizard-merged.bin \
 For detailed information about developing UI applications for the ESP32-P4, refer to:
 
 - **Tutorial Article**: [How to Easily Develop UI Applications for the ESP32-P4](https://developer.espressif.com/blog/2025/04/how-to-easily-develop-ui-applications-for-the-esp32-p4/)
-- **Official Documentation**: [Getting Started with ESP32-P4-Function-EV-Board](https://doc.embedded-wizard.de/getting-started-esp32?v=14.00)
+- **Official Documentation**: [Getting Started with ESP32-P4-Function-EV-Board](https://doc.embedded-wizard.de/getting-started-esp32)
 - **Espressif Developer Portal**: [Embedded Wizard Resources](https://developer.espressif.com/tags/embedded-wizard/)
 
 ## Hardware Requirements
